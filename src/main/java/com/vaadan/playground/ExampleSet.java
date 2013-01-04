@@ -4,7 +4,9 @@ package com.vaadan.playground;
 import com.vaadan.playground.examples.embeddedapp.EmbeddedVaadinApp;
 import com.vaadan.playground.examples.test.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 public class ExampleSet {
 
@@ -16,10 +18,14 @@ public class ExampleSet {
 
     private static HashMap<String, Example> exampleList;
 
+    private final Example[] content;
+
     public ExampleSet(Example[] examples){
        if(exampleList == null){
            exampleList = new HashMap<String, Example>();
        }
+
+       this.content = examples;
 
        for (Example example : examples){
            String fragmentName = example.getFragmentName();
@@ -32,6 +38,10 @@ public class ExampleSet {
 
     public Example getExample(String exampleFragmentName){
         return exampleList.get(exampleFragmentName.toLowerCase());
+    }
+
+    public List<Example> getExamples(){
+        return Arrays.asList(content);
     }
 
 

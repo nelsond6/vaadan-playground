@@ -10,7 +10,7 @@ public class VaadinDemoApp extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
-        Label lbl = new Label("This is a Vaadin application");
+        Label lbl = new Label("This is an embedded Vaadin application");
         layout.addComponent(lbl);
         Button btn = new Button("Don't Click Me");
         btn.addClickListener(new Button.ClickListener() {
@@ -23,3 +23,5 @@ public class VaadinDemoApp extends UI {
         setContent(layout);
     }
 }
+
+
