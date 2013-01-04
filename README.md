@@ -1,3 +1,3 @@
 # Vaadan Playground
 
-A playground for my Vaadin examples
+A playground for my Vaadin examples.
