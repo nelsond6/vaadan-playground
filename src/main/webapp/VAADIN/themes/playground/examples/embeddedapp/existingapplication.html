@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <style>
+
+        #header {
+            background-color: #ff0000;
+        }
+
+        #main {
+            border-style: solid;
+            border-color: #000000;
+        }
+
+        #footer {
+            background-color: #2a42ff;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div id="header">Header of an existing application</div>
+    <div id="main" class="v-app">
+        <div class="v-app-loading"></div>
+    </div>
+    <div id="footer">Footer of an existing application</div>
+    <iframe tabindex="-1" id="__gwt_historyFrame" style="position:absolute;width:0;height:0;border:0;overflow:hidden" src="javascript:false"></iframe>
+    <script type="text/javascript" src="/VAADIN/vaadinBootstrap.js"></script>
+    <script type="text/javascript">//<![CDATA[
+        if (!window.vaadin) {
+            alert("Failed to load the bootstrap javascript: /VAADIN/vaadinBootstrap.js");
+        }
+        vaadin.initApplication("main",{
+            "authErrMsg": {
+                "caption": "Authentication problem",
+                "message": "Take note of any unsaved data, and <u>click here<\/u> to continue."
+            },
+            "comErrMsg": {
+                "caption": "Communication problem",
+                "message": "Take note of any unsaved data, and <u>click here<\/u> to continue."
+            },
+            "debug": true,
+            "heartbeatInterval": 300,
+            "sessExpMsg": {
+                "caption": "Session Expired",
+                "message": "Take note of any unsaved data, and <u>click here<\/u> to continue."
+            },
+            "standalone": true,
+            "theme": "playground",
+            "serviceUrl":"/VaadinDemoApp/",
+            "browserDetailsUrl": "/VaadinDemoApp/",
+            "vaadinDir": "/VAADIN/",
+            "versionInfo": {"vaadinVersion": "7.0.0.beta11"},
+            "widgetset": "com.vaadan.playground.AppWidgetSet"
+        });
+    //]]></script>
+</body>
+</html>

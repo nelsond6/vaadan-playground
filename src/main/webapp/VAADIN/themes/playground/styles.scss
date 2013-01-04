@@ -1,0 +1,5 @@
+@import "playground";
+
+.playground {
+  @include playground;
+}

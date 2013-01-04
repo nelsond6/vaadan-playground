@@ -1,0 +1,12 @@
+@import "../reindeer/styles.scss";
+
+
+
+@mixin playground {
+  @include reindeer;
+
+  .header {
+    background-color: #2840ff;
+  }
+
+}
