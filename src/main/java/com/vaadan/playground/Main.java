@@ -12,6 +12,7 @@ public class Main extends VerticalLayout {
     public Main(ObjectProperty<Example> currentExample){
        this.currentExample = currentExample;
        setSizeFull();
+       setStyleName("main");
 
        currentExample.addValueChangeListener(new Property.ValueChangeListener() {
             @Override

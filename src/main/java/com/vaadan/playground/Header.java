@@ -3,7 +3,7 @@ package com.vaadan.playground;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.data.util.ObjectProperty;
-import com.vaadin.shared.ui.MarginInfo;
+import com.vaadin.event.LayoutEvents;
 import com.vaadin.ui.*;
 
 import java.util.List;
@@ -14,7 +14,6 @@ public class Header extends HorizontalLayout {
 
     final private Button viewSourceBtn;
     final private Button viewInfoBtn;
-    final private Button homeBtn;
 
     public Header(ObjectProperty<Example> currentExample){
         this.currentExample = currentExample;
@@ -23,6 +22,17 @@ public class Header extends HorizontalLayout {
         setHeight("40px");
         setStyleName("header");
         setSpacing(true);
+
+        CssLayout logo = new CssLayout();
+        logo.setStyleName("logo");
+        addComponent(logo);
+        setComponentAlignment(logo, Alignment.MIDDLE_LEFT);
+        logo.addLayoutClickListener(new LayoutEvents.LayoutClickListener() {
+            @Override
+            public void layoutClick(LayoutEvents.LayoutClickEvent layoutClickEvent) {
+                UI.getCurrent().getPage().setUriFragment("home");
+            }
+        });
 
         BeanItemContainer<Example> examples = new BeanItemContainer<Example>(Example.class);
         List<Example> theExamples = ExampleSet.EXAMPLES.getExamples();
@@ -51,7 +61,6 @@ public class Header extends HorizontalLayout {
         viewSourceBtn = new Button("Source");
         addComponent(viewSourceBtn);
         viewSourceBtn.setVisible(false);
-        //setExpandRatio(viewSourceBtn, 1);
         setComponentAlignment(viewSourceBtn, Alignment.MIDDLE_LEFT);
         viewSourceBtn.addClickListener(new Button.ClickListener() {
             @Override
@@ -63,7 +72,6 @@ public class Header extends HorizontalLayout {
         viewInfoBtn = new Button("Info");
         addComponent(viewInfoBtn);
         viewInfoBtn.setVisible(false);
-        setExpandRatio(viewInfoBtn, 1);
         setComponentAlignment(viewInfoBtn, Alignment.MIDDLE_LEFT);
         viewInfoBtn.addClickListener(new Button.ClickListener() {
             @Override
@@ -72,16 +80,11 @@ public class Header extends HorizontalLayout {
             }
         });
 
-        homeBtn = new Button("Home");
-        addComponent(homeBtn);
-        homeBtn.setVisible(false);
-        setComponentAlignment(homeBtn, Alignment.MIDDLE_RIGHT);
-        homeBtn.addClickListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(Button.ClickEvent clickEvent) {
-                UI.getCurrent().getPage().setUriFragment("home");
-            }
-        });
+        //this will push the logo,combobox,source and info buttons to the left and everything else to the right
+        Label expandingGap = new Label();
+        expandingGap.setWidth("100%");
+        addComponent(expandingGap);
+        setExpandRatio(expandingGap, 1.0f);
 
         currentExample.addValueChangeListener(new Property.ValueChangeListener() {
             @Override
@@ -91,13 +94,11 @@ public class Header extends HorizontalLayout {
                     examplesCB.setValue(example);
                     viewSourceBtn.setVisible(true);
                     viewInfoBtn.setVisible(true);
-                    homeBtn.setVisible(true);
                 }
                 else {
                     //home is showing, so hide all the buttons and reset the combobox
                     viewSourceBtn.setVisible(false);
                     viewInfoBtn.setVisible(false);
-                    homeBtn.setVisible(false);
                     examplesCB.setValue(null);
                 }
             }

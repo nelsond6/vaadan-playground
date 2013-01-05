@@ -2,7 +2,7 @@ package com.vaadan.playground;
 
 
 import com.vaadan.playground.examples.embeddedapp.EmbeddedVaadinApp;
-import com.vaadan.playground.examples.test.Test;
+import com.vaadan.playground.examples.imageroundedborders.ImageWithRoundedBorders;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,10 +10,9 @@ import java.util.List;
 
 public class ExampleSet {
 
-
     public static final ExampleSet EXAMPLES = new ExampleSet(new Example[]{
         new EmbeddedVaadinApp(),
-        new Test()
+        new ImageWithRoundedBorders()
     });
 
     private static HashMap<String, Example> exampleList;
