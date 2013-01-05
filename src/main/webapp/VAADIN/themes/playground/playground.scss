@@ -9,9 +9,14 @@ $headerColor: #a3a3a3;
   .header {
     border-style: none none solid none;
     border-color: darken($headerColor, 20%);
-    border-width:1px;
+    border-width: 1px;
     background-color: $headerColor;
     padding-left: 10px;
+    padding-right: 10px;
+
+    outline-color: darken($headerColor, 50%);
+    outline-style: solid;
+    outline-width: 1px;
 
   }
 

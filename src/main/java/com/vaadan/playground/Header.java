@@ -1,6 +1,8 @@
 package com.vaadan.playground;
 
+import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItemContainer;
+import com.vaadin.data.util.ObjectProperty;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.*;
 
@@ -8,11 +10,17 @@ import java.util.List;
 
 public class Header extends HorizontalLayout {
 
-    private Example currentExample;
+    final private ObjectProperty<Example> currentExample;
 
-    public Header(){
+    final private Button viewSourceBtn;
+    final private Button viewInfoBtn;
+    final private Button homeBtn;
+
+    public Header(ObjectProperty<Example> currentExample){
+        this.currentExample = currentExample;
+
         setWidth("100%");
-        setHeight("50px");
+        setHeight("40px");
         setStyleName("header");
         setSpacing(true);
 
@@ -20,33 +28,92 @@ public class Header extends HorizontalLayout {
         List<Example> theExamples = ExampleSet.EXAMPLES.getExamples();
         examples.addAll(theExamples);
 
-        ComboBox examplesCB = new ComboBox();
+        final ComboBox examplesCB = new ComboBox();
         examplesCB.setContainerDataSource(examples);
         examplesCB.setItemCaptionMode(AbstractSelect.ItemCaptionMode.PROPERTY);
         examplesCB.setItemCaptionPropertyId("name");
         examplesCB.setNullSelectionAllowed(false);
         examplesCB.setInputPrompt("Choose an example");
+        examplesCB.setImmediate(true);
+        examplesCB.addValueChangeListener(new Property.ValueChangeListener() {
+            @Override
+            public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+                Example selectedValue = (Example)valueChangeEvent.getProperty().getValue();
+                if(selectedValue != null){ //it will be null if use goes back to home view
+                    //set the Uri fragment to selected example
+                    UI.getCurrent().getPage().setUriFragment(selectedValue.getFragmentName());
+                }
+            }
+        });
         addComponent(examplesCB);
         setComponentAlignment(examplesCB, Alignment.MIDDLE_LEFT);
 
+        viewSourceBtn = new Button("Source");
+        addComponent(viewSourceBtn);
+        viewSourceBtn.setVisible(false);
+        //setExpandRatio(viewSourceBtn, 1);
+        setComponentAlignment(viewSourceBtn, Alignment.MIDDLE_LEFT);
+        viewSourceBtn.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent clickEvent) {
+                displaySource();
+            }
+        });
 
-        /*Button btn1 = new Button("Test 1");
-        addComponent(btn1);
-        setComponentAlignment(btn1, Alignment.MIDDLE_LEFT);
+        viewInfoBtn = new Button("Info");
+        addComponent(viewInfoBtn);
+        viewInfoBtn.setVisible(false);
+        setExpandRatio(viewInfoBtn, 1);
+        setComponentAlignment(viewInfoBtn, Alignment.MIDDLE_LEFT);
+        viewInfoBtn.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent clickEvent) {
+                displayInfo();
+            }
+        });
 
-        Button btn2 = new Button("Test 2");
-        addComponent(btn2);
-        setExpandRatio(btn2, 1);
-        setComponentAlignment(btn2, Alignment.MIDDLE_LEFT);
+        homeBtn = new Button("Home");
+        addComponent(homeBtn);
+        homeBtn.setVisible(false);
+        setComponentAlignment(homeBtn, Alignment.MIDDLE_RIGHT);
+        homeBtn.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent clickEvent) {
+                UI.getCurrent().getPage().setUriFragment("home");
+            }
+        });
 
-        Button btn3 = new Button("Test 3");
-        addComponent(btn3);
-        setComponentAlignment(btn3, Alignment.MIDDLE_LEFT);*/
-
+        currentExample.addValueChangeListener(new Property.ValueChangeListener() {
+            @Override
+            public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+                Example example = (Example)valueChangeEvent.getProperty().getValue();
+                if(example != null){
+                    examplesCB.setValue(example);
+                    viewSourceBtn.setVisible(true);
+                    viewInfoBtn.setVisible(true);
+                    homeBtn.setVisible(true);
+                }
+                else {
+                    //home is showing, so hide all the buttons and reset the combobox
+                    viewSourceBtn.setVisible(false);
+                    viewInfoBtn.setVisible(false);
+                    homeBtn.setVisible(false);
+                    examplesCB.setValue(null);
+                }
+            }
+        });
 
     }
 
-    public void setExample(Example example){
-         currentExample = example;
+    private void displaySource(){
+        Example example = (Example)currentExample.getValue();
+        Notification.show("Show source for:"+example.getName());
     }
+
+    private void displayInfo(){
+        Example example = (Example)currentExample.getValue();
+        Notification.show("Show info for:"+example.getName());
+    }
+
+
 }

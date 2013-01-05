@@ -1,10 +1,10 @@
 package com.vaadan.playground;
 
 import com.vaadin.annotations.Theme;
+import com.vaadin.data.util.ObjectProperty;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.*;
-import com.vaadin.ui.Button.ClickEvent;
 
 /**
  * The Application's "main" class
@@ -13,8 +13,9 @@ import com.vaadin.ui.Button.ClickEvent;
 @Theme("playground")
 public class PlaygroundUI extends UI
 {
-    private final Header header = new Header();
-    private final ExampleView exampleView = new ExampleView();
+    private final ObjectProperty<Example> currentExample = new ObjectProperty<Example>(null, Example.class);
+    private final Header header = new Header(currentExample);
+    private final Main main = new Main(currentExample);
 
     @Override
     protected void init(VaadinRequest request) {
@@ -26,7 +27,7 @@ public class PlaygroundUI extends UI
         VerticalLayout layout = new VerticalLayout();
 
         layout.addComponent(header);
-        layout.addComponent(exampleView);
+        layout.addComponent(main);
 
         setContent(layout);
     }
@@ -54,6 +55,7 @@ public class PlaygroundUI extends UI
     private void handleUriFragmentChange(String uriFragment) {
         if(uriFragment.equals("home")){
             Notification.show("Choose an example from above.");
+            setExample(null);
         }else {
             Example example = ExampleSet.EXAMPLES.getExample(uriFragment);
             if(example == null){
@@ -66,8 +68,7 @@ public class PlaygroundUI extends UI
     }
 
     private void setExample(Example example){
-        header.setExample(example);
-        exampleView.setExample(example);
+        currentExample.setValue(example);
     }
 
 }
