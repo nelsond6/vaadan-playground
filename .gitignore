@@ -8,3 +8,4 @@ target/
 *.iml
 gwt-unitCache
 widgetsets
+rebel.xml
