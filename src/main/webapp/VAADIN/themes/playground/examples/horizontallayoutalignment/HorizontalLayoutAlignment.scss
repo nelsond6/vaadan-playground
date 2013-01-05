@@ -1,0 +1,25 @@
+@mixin playground-examples-HorizontalLayoutAlignment($primaryStyleName : HorizontalLayoutAlignmentExample) {
+
+
+  .#{$primaryStyleName}-default-behavior {
+    border-style: solid;
+    border-color: #000000;
+  }
+
+  .#{$primaryStyleName}-cssLeftAligned {
+    border-style: solid;
+    border-color: #000000;
+  }
+
+  div.#{$primaryStyleName}-cssLeftAlignedVertical {
+    display: table;
+    border-style: solid;
+    border-color: #000000;
+  }
+
+  div.#{$primaryStyleName}-cssLeftAlignedVertical-innerDiv {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+}

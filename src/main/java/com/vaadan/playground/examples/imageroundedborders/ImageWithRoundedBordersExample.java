@@ -5,6 +5,6 @@ import com.vaadin.ui.CssLayout;
 public class ImageWithRoundedBordersExample extends CssLayout {
 
     public ImageWithRoundedBordersExample(){
-         setStyleName("imageWithRoundedBordersExample");
+         setStyleName(getClass().getSimpleName());
     }
 }

@@ -2,6 +2,7 @@ package com.vaadan.playground;
 
 
 import com.vaadan.playground.examples.embeddedapp.EmbeddedVaadinApp;
+import com.vaadan.playground.examples.horizontallayoutalignment.HorizontalLayoutAlignment;
 import com.vaadan.playground.examples.imageroundedborders.ImageWithRoundedBorders;
 
 import java.util.Arrays;
@@ -12,7 +13,8 @@ public class ExampleSet {
 
     public static final ExampleSet EXAMPLES = new ExampleSet(new Example[]{
         new EmbeddedVaadinApp(),
-        new ImageWithRoundedBorders()
+        new ImageWithRoundedBorders(),
+        new HorizontalLayoutAlignment()
     });
 
     private static HashMap<String, Example> exampleList;
