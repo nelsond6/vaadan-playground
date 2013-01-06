@@ -5,7 +5,9 @@ import com.vaadan.playground.Example;
 
 public class HorizontalLayoutAlignment extends Example {
     @Override
-    public String getName() {
+     public String getName() {
         return "Horizontal Layout Alignment";
     }
+
+
 }

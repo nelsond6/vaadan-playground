@@ -2,7 +2,16 @@ package com.vaadan.playground;
 
 import com.vaadin.ui.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 abstract public class Example {
+    //https://github.com/nelsond6/vaadan-playground/blob/master/
+    final protected String basePath = "src/main/";
+    final protected String javaBasePath = basePath+"java/";
+    final protected String themesBasePath = basePath+"webapp/VAADIN/themes/";
+    final protected String themesPlaygroundBasePath = themesBasePath + "playground/";
+    final protected String themesPlaygroundExamplesBasePath = themesPlaygroundBasePath+"examples/";
 
     abstract public String getName();
 
@@ -10,13 +19,32 @@ abstract public class Example {
         return getClass().getSimpleName();
     }
 
+    private String getExampleSourcePath(){
+        String fullClassPath = getExampleClassObject().getName();
+        fullClassPath = fullClassPath.replace(".","/")+".java";
+        return javaBasePath+fullClassPath;
+    }
+
+    public List<String> getSources(){
+        List<String> sources = new ArrayList<String>();
+        sources.add(getExampleSourcePath());
+
+        List<String> additionalSources = getAdditionalSources();
+        if(additionalSources != null){
+            sources.addAll(additionalSources);
+        }
+
+        return sources;
+    }
+
+    public List<String> getAdditionalSources(){
+        return null;
+    }
+
     public Component getExample(){
-        String className = this.getClass().getName() + "Example";
         try {
-            Class<?> classObject = getClass().getClassLoader().loadClass(className);
+            Class<?> classObject = getExampleClassObject();
             return (Component) classObject.newInstance();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -24,6 +52,23 @@ abstract public class Example {
         }
          return null;
     }
+
+    private String getExampleClassName(){
+        return getClass().getName() + "Example";
+    }
+
+    private Class<?> getExampleClassObject(){
+        Class<?> classObject = null;
+        try {
+            classObject = getClass().getClassLoader().loadClass(getExampleClassName());
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return classObject;
+    }
+
+
 
 
 }

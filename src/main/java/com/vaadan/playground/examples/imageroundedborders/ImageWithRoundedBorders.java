@@ -8,4 +8,6 @@ public class ImageWithRoundedBorders extends Example {
     public String getName() {
         return "Image With Rounded Borders";
     }
+
+
 }
