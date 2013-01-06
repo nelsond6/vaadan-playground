@@ -108,8 +108,12 @@ public class Header extends HorizontalLayout {
 
     private void displaySource(){
         Example example = (Example)currentExample.getValue();
-        List<String> sources = example.getSources();
-        Notification.show("Show source for:"+example.getName());
+        //List<String> sources = example.getSources();
+        //Notification.show("Show source for:"+example.getName());
+        SourceView sourceView = new SourceView(example);
+
+        UI.getCurrent().addWindow(sourceView);
+
     }
 
     private void displayInfo(){

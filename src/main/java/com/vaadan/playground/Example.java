@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract public class Example {
-    //https://github.com/nelsond6/vaadan-playground/blob/master/
+
     final protected String basePath = "src/main/";
     final protected String javaBasePath = basePath+"java/";
     final protected String themesBasePath = basePath+"webapp/VAADIN/themes/";

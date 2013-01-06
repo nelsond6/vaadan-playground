@@ -11,15 +11,8 @@ public class EmbeddedVaadinAppExample extends HorizontalLayout {
         content.setType(Embedded.TYPE_BROWSER);
         content.setWidth("100%");
         content.setHeight("500px");
-
         addComponent(content);
-
         setSizeFull();
-
-        /*Button myButton = new Button("My button 3");
-        addComponent(myButton);
-        setComponentAlignment(myButton, Alignment.BOTTOM_RIGHT);*/
-
     }
 
 }
