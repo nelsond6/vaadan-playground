@@ -23,7 +23,7 @@ public class Header extends HorizontalLayout {
         setStyleName("header");
         setSpacing(true);
 		
-		//This is test change
+		//This is test
 
         CssLayout logo = new CssLayout();
         logo.setStyleName("logo");
