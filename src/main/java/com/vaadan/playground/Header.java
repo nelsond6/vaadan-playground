@@ -22,6 +22,8 @@ public class Header extends HorizontalLayout {
         setHeight("40px");
         setStyleName("header");
         setSpacing(true);
+		
+		//
 
         CssLayout logo = new CssLayout();
         logo.setStyleName("logo");
