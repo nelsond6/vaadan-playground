@@ -14,11 +14,6 @@
             <param-name>UI</param-name>
             <param-value>com.vaadan.playground.PlaygroundUI</param-value>
         </init-param>
-        <init-param>
-            <description>Application widgetset</description>
-            <param-name>widgetset</param-name>
-            <param-value>com.vaadan.playground.AppWidgetSet</param-value>
-        </init-param>
     </servlet>
     <servlet>
         <servlet-name>Embedded Vaadin App Example</servlet-name>
@@ -27,11 +22,6 @@
             <description>Vaadin UI to display</description>
             <param-name>UI</param-name>
             <param-value>com.vaadan.playground.examples.embeddedapp.VaadinDemoApp</param-value>
-        </init-param>
-        <init-param>
-            <description>Application widgetset</description>
-            <param-name>widgetset</param-name>
-            <param-value>com.vaadan.playground.AppWidgetSet</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
