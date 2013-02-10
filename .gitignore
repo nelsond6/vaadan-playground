@@ -9,3 +9,5 @@ target/
 gwt-unitCache
 widgetsets
 rebel.xml
+release.properties
+pom.xml.releaseBackup
