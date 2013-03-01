@@ -4,7 +4,7 @@
     <groupId>com.vaadan.playground</groupId>
     <artifactId>playground</artifactId>
     <packaging>war</packaging>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
     <name>Vaadin Web Application</name>
 
     <properties>
